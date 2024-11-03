@@ -38,11 +38,8 @@ export default function UpdateRouter(opts: UpdateRouterOptions): Router {
 	router.get(
 		UpdateEndpoint.path,
 		assertAuthorizationSchemeValid,
+		assertTokenValid(opts.tokenVerifier),
 		async (request, response) => {
-			if (typeof opts.tokenVerifier === "function") {
-				await assertTokenValid(opts.tokenVerifier, request, response);
-			}
-
 			const { passTypeIdentifier, serialNumber } = request.params;
 
 			const modifiedSinceTimestamp = request.headers["if-modified-since"]

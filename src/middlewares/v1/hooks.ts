@@ -1,4 +1,4 @@
-import type { NextFunction, Request, Response } from "express";
+import type { NextFunction, Request, Response, Handler } from "express";
 import {
 	isAuthorizationSchemeValid,
 	getAuthorizationToken,
@@ -23,22 +23,33 @@ export function assertAuthorizationSchemeValid(
 	next();
 }
 
-export async function assertTokenValid(
-	verifyToken: (token: string) => PromiseLike<boolean>,
-	request: Request,
-	response: Response,
-): Promise<void> {
-	const { authorization = "" } = request.headers;
+export function assertTokenValid(
+	verifyToken?: (token: string) => PromiseLike<boolean>,
+): Handler {
+	return async function (
+		request: Request,
+		response: Response,
+		next: NextFunction,
+	) {
+		if (typeof verifyToken !== "function") {
+			next();
+			return;
+		}
 
-	const token = getAuthorizationToken(authorization);
+		const { authorization = "" } = request.headers;
 
-	if (!(await verifyToken(token))) {
-		console.warn(
-			`Authorization token validation failed. Received: ${authorization}`,
-		);
-		response.status(401).send();
-		return;
-	}
+		const token = getAuthorizationToken(authorization);
+
+		if (!(await verifyToken(token))) {
+			console.warn(
+				`Authorization token validation failed. Received: ${authorization}`,
+			);
+			response.status(401).send();
+			return;
+		}
+
+		next();
+	};
 }
 
 // export function createResponsePayloadValidityCheckerHook(

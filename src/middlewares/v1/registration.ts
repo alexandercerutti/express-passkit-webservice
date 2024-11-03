@@ -56,11 +56,8 @@ export default function RegistrationRouter(
 	router.post<Route, Params, ResBody, ReqBody>(
 		RegisterEndpoint.path,
 		assertAuthorizationSchemeValid,
+		assertTokenValid(opts.tokenVerifier),
 		async (request, response) => {
-			if (typeof opts.tokenVerifier === "function") {
-				await assertTokenValid(opts.tokenVerifier, request, response);
-			}
-
 			const { deviceLibraryIdentifier, passTypeIdentifier, serialNumber } =
 				request.params;
 
@@ -82,11 +79,8 @@ export default function RegistrationRouter(
 	router.delete(
 		UnregisterEndpoint.path,
 		assertAuthorizationSchemeValid,
+		assertTokenValid(opts.tokenVerifier),
 		async (request, response) => {
-			if (typeof opts.tokenVerifier === "function") {
-				await assertTokenValid(opts.tokenVerifier, request, response);
-			}
-
 			const { deviceLibraryIdentifier, passTypeIdentifier, serialNumber } =
 				request.params;
 
