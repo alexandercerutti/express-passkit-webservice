@@ -14,6 +14,8 @@ Everything is designed to provide a good developer experience. It is fully compa
 
 This package is an integration of [passkit-webservice-toolkit](https://github.com/alexandercerutti/passkit-webservice-toolkit). Visit it for other integrations.
 
+Both Express v4 and v5 are supported.
+
 ### Installation
 
 ```sh
