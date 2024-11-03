@@ -12,7 +12,7 @@ Each plugin represents a subscription to an endpoint defined in [Apple Wallet De
 
 Everything is designed to provide a good developer experience. It is fully compatible with Typescript.
 
-This package is an integration of [passkit-webservice-toolkit](https://github.com/alexandercerutti/passkit-webservice-toolkit).
+This package is an integration of [passkit-webservice-toolkit](https://github.com/alexandercerutti/passkit-webservice-toolkit). Visit it for other integrations.
 
 ### Installation
 
@@ -24,6 +24,26 @@ $ npm install express-passkit-webservice
 
 ## API Documentation
 
-All the exposed informations are detailed in the Wiki.
+All the details are available in the project wiki.
 
 ---
+
+### Usage example
+
+All the exposed middlewares work like this:
+
+```js
+import express from "express";
+import registrationRouter from "express-passkit-webservice/v1/registration.js";
+
+const app = express();
+
+app.use(registrationRouter({
+	async onRegister(deviceLibraryIdentifier, passTypeIdentifier, serialNumber, pushToken) {
+		/** your implementation */
+	}
+	async onUnregister(deviceLibraryIdentifier, passTypeIdentifier, serialNumber) {
+		/** your implementation */
+	}
+}));
+```
