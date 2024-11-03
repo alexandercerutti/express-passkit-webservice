@@ -11,10 +11,17 @@
 		"run:server": "node specs/server.mjs",
 		"prepublish": "pnpm run test && pnpm run build"
 	},
-	"keywords": [],
-	"author": "",
+	"keywords": [
+		"Apple",
+		"Passkit",
+		"Wallet",
+		"Pass"
+	],
+	"author": "Alexander Patrick Cerutti",
+	"repository": "https://github.com/alexandercerutti/express-passkit-webservice",
+	"bugs": "https://github.com/alexandercerutti/express-passkit-webservice/issues",
 	"type": "module",
-	"license": "ISC",
+	"license": "MIT",
 	"devDependencies": {
 		"@types/express": "^5.0.0",
 		"@types/express-serve-static-core": "^5.0.1",
@@ -37,5 +44,8 @@
 		".": "./lib/index.js",
 		"./v1": "./lib/middlewares/v1/index.js",
 		"./v1/*": "./lib/middlewares/v1/*"
-	}
+	},
+	"files": [
+		"lib/**/*.+(js|d.ts)"
+	]
 }
