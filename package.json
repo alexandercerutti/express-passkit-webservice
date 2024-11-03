@@ -13,6 +13,7 @@
 	},
 	"keywords": [],
 	"author": "",
+	"type": "module",
 	"license": "ISC",
 	"devDependencies": {
 		"@types/express": "^5.0.0",
@@ -32,5 +33,9 @@
 	"peerDependencies": {
 		"express": "^5.0.1"
 	},
+	"exports": {
+		".": "./lib/index.js",
+		"./v1": "./lib/middlewares/v1/index.js",
+		"./v1/*": "./lib/middlewares/v1/*"
 	}
 }
