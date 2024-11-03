@@ -51,24 +51,3 @@ export function assertTokenValid(
 		next();
 	};
 }
-
-// export function createResponsePayloadValidityCheckerHook(
-// 	expectedType: string,
-// 	predicate: (payload: unknown, code: number) => boolean,
-// ): onSendHookHandler<unknown> {
-// 	return async function payloadValidityCheckerHook<Payload>(
-// 		_: FastifyRequest,
-// 		reply: FastifyReply,
-// 		payload: Payload,
-// 	) {
-// 		const result = predicate(payload, reply.statusCode);
-
-// 		if (!result) {
-// 			throw new Error(
-// 				`Unexpected outcoming payload type. Expected a '${expectedType}' but returning ${result}`,
-// 			);
-// 		}
-
-// 		return payload;
-// 	};
-// }
